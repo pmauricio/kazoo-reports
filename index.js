@@ -25,9 +25,9 @@ pool.query('DROP TABLE IF EXISTS kazoo_hub_log', (err, res) => {
     // console.log(err, res);
     // pool.end()
    // /Users/mauro/apps/kazoo/kazoo-reports/data/semana3007/semana30al5deAgosto
-      const testFolder = './data/logs_unilever';
-   // const testFolder = './data/test/';
-    const dir_out = './data/out/logs_unilver/';
+      const testFolder = './data/logs_unilever/';
+     const outFolder = './data/ok/';
+    //const dir_out = './data/out/logs_unilver/';
 
     var self = this
     this.counter = 0;
@@ -37,13 +37,13 @@ pool.query('DROP TABLE IF EXISTS kazoo_hub_log', (err, res) => {
 
     files.forEach(function (file) {
          console.log(file);
-   //   console.log(query);
-      query = 'insert into  kazoo_hub_log (date, mac,ssr,hub) values';
-      var contents = fs.readFileSync(testFolder + file, 'utf8');
+        // console.log(query);
+        query = 'insert into  kazoo_hub_log (date, mac,ssr,hub) values';
+        var contents = fs.readFileSync(testFolder + file, 'utf8');
 
 
-    // var query_data = [][];
-      contents.split('\n').forEach(function (line) {
+        // var query_data = [][];
+        contents.split('\n').forEach(function (line) {
         line=line.replace(' ', '#');
         line=line.replace(' ', '\',\'YYYY-MM-DD#HH24:MI:SS.US\'),\'');
     
@@ -57,7 +57,7 @@ pool.query('DROP TABLE IF EXISTS kazoo_hub_log', (err, res) => {
         line=line.replace('#', ' ');
         line=line.replace('#', ' ');
         // console.log('>>>>'+line);
-       // line=line.replace(',,',',\'');
+        // line=line.replace(',,',',\'');
         
         query = query +' '+line+',\n';
        
@@ -85,6 +85,10 @@ pool.query('DROP TABLE IF EXISTS kazoo_hub_log', (err, res) => {
         if (res) {
           console.log('ok ');
           console.log(res);
+          fs.rename(testFolder + file, outFolder +file, (err) => {
+            if (err) throw err;
+            console.log('Rename complete!');
+          });
         }})
       
 
