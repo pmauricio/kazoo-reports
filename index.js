@@ -17,15 +17,15 @@ const { Pool, Client } = require('pg')
 const pool = new Pool()
 const client = new Client()
 this.counter = 0;
-//pool.query('DROP TABLE IF EXISTS kazoo_hub_log', (err, res) => {
+pool.query('DROP TABLE IF EXISTS kazoo_hub_log', (err, res) => {
   // console.log(err, res);
   // pool.end()
 
-  //pool.query('CREATE  TABLE  kazoo_hub_log(id SERIAL PRIMARY KEY, mac VARCHAR(17),ssr INTEGER, date timestamptz,hub VARCHAR(40))', (err, res) => {
+  pool.query('CREATE  TABLE  kazoo_hub_log(id SERIAL PRIMARY KEY, mac VARCHAR(17),ssr INTEGER, date timestamptz,hub VARCHAR(40))', (err, res) => {
     // console.log(err, res);
     // pool.end()
    // /Users/mauro/apps/kazoo/kazoo-reports/data/semana3007/semana30al5deAgosto
-      const testFolder = './data/semana3007/znok/';
+      const testFolder = './data/logs_unilever';
    // const testFolder = './data/test/';
     const dir_out = './data/out/logs_unilver/';
 
@@ -134,7 +134,7 @@ this.counter = 0;
 
 
     })
- //})  })
+ })  })
 
 
 
